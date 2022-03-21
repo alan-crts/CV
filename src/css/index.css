@@ -1,7 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300&display=swap');
-@media only screen and (max-width:600px) {
+@media only screen and (max-width:900px) {
     html {
-        font-size: 12px;
+        font-size: 15px;
+    }
+    .header-card {
+        text-align: center;
+        padding: 1em;
+    }
+    .header-card img {
+        width: 8em!important;
+        border-radius: 20px!important;
+    }
+    .header-card {
+        flex-direction: column;
+    }
+    .header-card div {
+        margin: auto!important;
+    }
+    .part2 .card {
+        width: 90vw!important;
+        margin: 2em auto!important;
+    }
+    .lang {
+        margin-right: 0!important;
     }
     .form {
         grid-area: 1 / 1 / 2 / 3!important;
@@ -15,25 +36,10 @@
     .int {
         grid-area: 4 / 1 / 5 / 3!important;
     }
-    .part2 .card {
-        width: 90vw!important;
-    }
-}
-
-@media only screen and (max-width:500px) {
-    html {
-        font-size: 10px;
-    }
-    .header-card img:hover {
-        width: 80px!important;
-    }
-    .header-card img {
-        width: 80px!important;
-    }
 }
 
 html {
-    scroll-snap-type: y mandatory;
+    overflow: hidden;
 }
 
 body {
@@ -55,10 +61,13 @@ a:hover {
 }
 
 header {
-    height: 99vh;
+    height: 100vh;
     margin: 0!important;
     display: flex;
     flex-direction: column;
+    position: absolute;
+    width: 100vw;
+    transition: all .5s ease-in-out;
 }
 
 footer {
@@ -102,15 +111,12 @@ footer button:active {
 }
 
 .header-card {
-    width: 27em;
     border-radius: 20px;
     margin: auto;
-    padding: 1em;
     display: flex;
-    height: 10em;
     color: rgb(66, 62, 57);
     background-color: #FFF;
-    box-shadow: 0px 0px 20px -2px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 20px -2px rgb(0 0 0 / 40%);
 }
 
 .header-card h1 {
@@ -125,17 +131,13 @@ footer button:active {
 
 .header-card img {
     margin: auto;
-    border-radius: 10px;
-    width: 100px;
+    border-radius: 20px 0 0 20px;
+    width: 200px;
     transition: all .5s ease;
 }
 
-.header-card img:hover {
-    width: 130px;
-}
-
 .header-card div {
-    margin: auto;
+    margin: auto 3em auto 1.5em;
 }
 
 .header-card a {
@@ -150,6 +152,9 @@ footer button:active {
     grid-template-rows: repeat(4, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    width: 100vw;
+    transition: all .5s ease-in-out;
+    overflow: auto;
 }
 
 .form {
@@ -218,12 +223,6 @@ footer button:active {
     height: 100vh;
 }
 
-.part {
-    margin: 1vh 0 0;
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-}
-
 .disabled {
     opacity: .3;
     /*display: none;*/
@@ -240,6 +239,21 @@ footer button:active {
 
 .bold {
     font-weight: bold;
+}
+
+.top {
+    transform: translateY(-100vh);
+    opacity: 0;
+}
+
+.view {
+    transform: translateY(0vh);
+    opacity: 1;
+}
+
+.bottom {
+    transform: translateY(100vh);
+    opacity: 0;
 }
 
 @keyframes FadeIn {
