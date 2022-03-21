@@ -82,7 +82,18 @@ function page(e) {
     }
 }
 
+let lastY = 0
+
+function phone(e) {
+    if (lastY != 0) {
+        e.deltaY = e.pageY - lastY
+    }
+    lastY = e.pageY
+    page(e)
+}
+
 document.addEventListener('wheel', page);
+document.addEventListener('touchmove', phone);
 
 if (history.scrollRestoration) {
     history.scrollRestoration = 'manual';
