@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @media only screen and (max-width:900px) {
     html {
         font-size: 15px;
@@ -10,6 +10,7 @@
     .header-card img {
         width: 8em!important;
         border-radius: 20px!important;
+        animation: FadeInImgTouchDevice 2s!important;
     }
     .header-card {
         flex-direction: column;
@@ -24,18 +25,6 @@
     .lang {
         margin-right: 0!important;
     }
-    .form {
-        grid-area: 1 / 1 / 2 / 3!important;
-    }
-    .exp {
-        grid-area: 2 / 1 / 3 / 3!important;
-    }
-    .comp {
-        grid-area: 3 / 1 / 4 / 3!important;
-    }
-    .int {
-        grid-area: 4 / 1 / 5 / 3!important;
-    }
 }
 
 html {
@@ -44,16 +33,24 @@ html {
 
 body {
     margin: 0;
-    background: linear-gradient(-45deg, #ee7752, #ff00b3, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-    font-family: 'Lato', sans-serif;
+    background-color: #8BC6EC;
+    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    color: #001f3f;
+}
+
+p,
+ul {
+    color: #003e7e;
 }
 
 a {
     text-decoration: none;
-    color: #23a6d5;
-    transition: all .2s ease;
+    color: #6d99ef;
+    transition: transform .2s ease;
 }
 
 a:hover {
@@ -117,6 +114,8 @@ footer button:active {
     color: rgb(66, 62, 57);
     background-color: #FFF;
     box-shadow: 0px 0px 20px -2px rgb(0 0 0 / 40%);
+    overflow: hidden;
+    animation: pop 1s;
 }
 
 .header-card h1 {
@@ -126,14 +125,36 @@ footer button:active {
 
 .header-card h1 span {
     display: block;
-    animation: FadeIn 500ms;
+    animation: FadeInText 2s;
+}
+
+.header-card p span {
+    display: block;
+    animation: FadeInText 2.2s;
+}
+
+.header-card a span {
+    display: block;
+    animation: FadeInText 2.3s;
+}
+
+.header-card p:first-of-type {
+    margin-bottom: 0;
+}
+
+.header-card p:last-of-type {
+    margin-top: 0;
+}
+
+.header-card p {
+    overflow: hidden;
 }
 
 .header-card img {
     margin: auto;
     border-radius: 20px 0 0 20px;
     width: 200px;
-    transition: all .5s ease;
+    animation: FadeInImg 2.3s;
 }
 
 .header-card div {
@@ -142,35 +163,17 @@ footer button:active {
 
 .header-card a {
     display: block;
+    overflow: hidden;
     width: fit-content;
 }
 
 .part2 {
     height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    display: flex;
+    flex-wrap: wrap;
     width: 100vw;
     transition: all .5s ease-in-out;
     overflow: auto;
-}
-
-.form {
-    grid-area: 1 / 1 / 3 / 2;
-}
-
-.exp {
-    grid-area: 1 / 2 / 3 / 3;
-}
-
-.comp {
-    grid-area: 3 / 1 / 5 / 2;
-}
-
-.int {
-    grid-area: 3 / 2 / 5 / 3;
 }
 
 .part2 .card {
@@ -201,7 +204,7 @@ footer button:active {
 
 .lang img {
     width: 2em;
-    transition: all .4s ease;
+    transition: transform .4s ease;
 }
 
 .lang img:hover {
@@ -256,17 +259,50 @@ footer button:active {
     opacity: 0;
 }
 
-@keyframes FadeIn {
+@keyframes FadeInText {
     0% {
+        transform: translateY(100%);
+    }
+    50% {
         transform: translateY(100%);
     }
     100% {
         transform: translateY(0%);
     }
 }
-@supports (-webkit-touch-callout: none) {
-  body {
-    /* The hack for Safari */
-    min-height: -webkit-fill-available;
-  }
+
+@keyframes FadeInImg {
+    0% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes FadeInImgTouchDevice {
+    0% {
+        transform: translateY(-125%);
+    }
+    50% {
+        transform: translateY(-125%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0%);
+    }
+    75% {
+        transform: scale(110%);
+    }
+    100% {
+        transform: scale(100%);
+    }
 }

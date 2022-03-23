@@ -19,7 +19,6 @@ function scroll_bellow() {
 }
 
 function page(e) {
-    console.log(e.deltaY)
     if ((delta > 0 && e.deltaY < 0) || (delta < 0 && e.deltaY > 0)) {
         use = false
     } else {
@@ -27,20 +26,16 @@ function page(e) {
             if (reset == true && delta < e.deltaY) {
                 use = false
                 reset = false
-                console.log('scroll')
             }
             if (delta == e.deltaY && e.deltaY > 10) {
-                console.log('reset')
                 reset = true
             }
         } else {
             if (reset == true && delta > e.deltaY) {
                 use = false
                 reset = false
-                console.log('scroll')
             }
             if (delta == e.deltaY && e.deltaY < -10) {
-                console.log('reset')
                 reset = true
             }
         }
@@ -52,10 +47,10 @@ function page(e) {
     }, 100)
     if (use == false) {
         var elements = document.getElementsByClassName('part')
-        if (elements.length != currentPage + 1 && delta > 10) {
-            document.removeEventListener('wheel', page)
-            use = true
-            if (elements[currentPage].scrollTop == elements[currentPage].scrollHeight - window.innerHeight) {
+        if (elements.length != currentPage + 1 && delta > 50) {
+            if (Math.floor(elements[currentPage].scrollTop) == Math.floor(elements[currentPage].scrollHeight - window.innerHeight)) {
+                document.removeEventListener('wheel', page)
+                use = true
                 elements[currentPage].classList.add('top')
                 elements[currentPage].classList.remove('view')
                 currentPage++
@@ -63,12 +58,12 @@ function page(e) {
                 elements[currentPage].classList.remove('bottom')
                 setTimeout(function() {
                     document.addEventListener('wheel', page);
-                }, 1000)
+                }, 500)
             }
-        } else if (currentPage > 0 && delta < -10) {
-            document.removeEventListener('wheel', page)
-            use = true
+        } else if (currentPage > 0 && delta < -50) {
             if (elements[currentPage].scrollTop == 0) {
+                document.removeEventListener('wheel', page)
+                use = true
                 elements[currentPage].classList.add('bottom')
                 elements[currentPage].classList.remove('view')
                 currentPage--
@@ -76,24 +71,29 @@ function page(e) {
                 elements[currentPage].classList.remove('top')
                 setTimeout(function() {
                     document.addEventListener('wheel', page);
-                }, 1000)
+                }, 500)
             }
         }
     }
 }
 
-let lastY = 0
+//for touch devices
+let Y = 0
 
-function phone(e) {
-    if (lastY != 0) {
-        e.deltaY = e.pageY - lastY
-    }
-    lastY = e.pageY
+function touchStart(e) {
+    Y = e.changedTouches[0].clientY
+}
+
+function touchEnd(e) {
+    e.deltaY = Y - e.changedTouches[0].clientY
     page(e)
 }
 
 document.addEventListener('wheel', page);
-document.addEventListener('touchmove', phone);
+document.addEventListener('touchstart', touchStart);
+document.addEventListener('touchend', touchEnd);
+
+
 
 if (history.scrollRestoration) {
     history.scrollRestoration = 'manual';
