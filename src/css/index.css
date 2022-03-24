@@ -297,12 +297,12 @@ footer button:active {
 
 @keyframes pop {
     0% {
-        transform: scale(0%);
+        transform: scale(0);
     }
     75% {
-        transform: scale(110%);
+        transform: scale(1.1);
     }
     100% {
-        transform: scale(100%);
+        transform: scale(1);
     }
 }
