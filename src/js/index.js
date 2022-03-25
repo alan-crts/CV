@@ -90,8 +90,8 @@ function touchEnd(e) {
 }
 
 document.addEventListener('wheel', page);
-document.addEventListener('touchstart', touchStart);
-document.addEventListener('touchend', touchEnd);
+window.addEventListener('touchstart', touchStart);
+window.addEventListener('touchend', touchEnd);
 
 
 
